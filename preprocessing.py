@@ -44,7 +44,7 @@ print('ncolums. ', ncolums)
 df_numeric = df_dropped.apply(pd.to_numeric, errors='coerce')
 print(df_numeric)
 
-exit()
+#exit()
 
 
 #df_encoded.plot()
@@ -54,9 +54,9 @@ exit()
 # Identify outliers using Z-score
 from scipy import stats
 
-z_scores = np.abs(stats.zscore(df_encoded))
-print(z_scores)
-df_no_outliers = df_encoded[(z_scores < 3).all(axis=1)]
+z_scores = np.abs(stats.zscore(df_numeric))
+print(len(z_scores))
+df_no_outliers = df_numeric[(z_scores < 3).all(axis=1)]
 
 # Or cap outliers at a threshold
 # upper_limit = df_cleaned['column_name'].quantile(0.95)
