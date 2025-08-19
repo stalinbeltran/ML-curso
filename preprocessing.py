@@ -10,7 +10,7 @@ df = pd.read_csv('loan-train.csv')  # Replace 'your_dataset.csv' with your actua
 # = pd.read_csv('minitest.csv')  # Replace 'your_dataset.csv' with your actual file path
 
 # Display the first few rows of the dataset
-#print(df.head())
+print(df.head())
 
 # Visualize missing data (optional)
 #msno.matrix(df)
@@ -28,8 +28,14 @@ df_cleaned = df.dropna()
 
 
 # One-hot encoding for categorical variables
-df_encoded = pd.get_dummies(df_cleaned, columns=['Gender', 'Married', 'Education', 'Self_Employed'])
+df_encoded = pd.get_dummies(df_cleaned, columns=['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area', 'Loan_Status'])
 print(df_encoded.head())
+
+
+df_encoded = df_encoded.drop('Loan_ID', axis= 1)
+print(df_encoded.head())
+
+
 #df_encoded.plot()
 #plt.show()
 
