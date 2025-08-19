@@ -40,8 +40,12 @@ df_dropped = df_dropped.drop(df_dropped.columns[range(1, 19)], axis= 1)
 print(df_dropped.head())
 ncolums = df_dropped.shape[1]
 print('ncolums. ', ncolums)
-df_numeric = pd.to_numeric(df_dropped.columns[range(0, ncolums)])
-print(df_numeric.head())
+#pd.to_numeric(df['A'], errors='coerce').notnull().all())
+df_numeric = pd.to_numeric(df_dropped['Dependents'], errors='coerce') #.notnull().all()
+print(df_numeric)
+
+exit()
+
 
 #df_encoded.plot()
 #plt.show()
