@@ -41,7 +41,7 @@ print(df_dropped.head())
 ncolums = df_dropped.shape[1]
 print('ncolums. ', ncolums)
 #pd.to_numeric(df['A'], errors='coerce').notnull().all())
-df_numeric = pd.to_numeric(df_dropped['Dependents'], errors='coerce') #.notnull().all()
+df_numeric = df_dropped.apply(pd.to_numeric, errors='coerce')
 print(df_numeric)
 
 exit()
