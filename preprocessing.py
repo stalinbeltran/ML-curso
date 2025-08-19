@@ -31,10 +31,15 @@ df_cleaned = df.dropna()
 df_encoded = pd.get_dummies(df_cleaned, columns=['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area', 'Loan_Status'])
 print(df_encoded.head())
 
+columns = df_encoded.columns[range(1, 14)]
+print(columns)
 
-df_encoded = df_encoded.drop('Loan_ID', axis= 1)
-print(df_encoded.head())
 
+df_dropped = df_encoded.drop(df_encoded.columns[range(1, 20)], axis= 1)
+#df_dropped = df_encoded.drop(df_encoded.columns[range(0, 14)], axis= 1)
+print(df_dropped.head())
+
+exit()
 
 #df_encoded.plot()
 #plt.show()
