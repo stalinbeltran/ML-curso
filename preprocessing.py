@@ -45,6 +45,17 @@ df_numeric = df_dropped.apply(pd.to_numeric, errors='coerce')
 df_numeric = df_numeric.dropna()
 print(df_numeric)
 
+# Min-Max Scaling
+scaler = MinMaxScaler()
+df_scaled = pd.DataFrame(scaler.fit_transform(df_numeric), columns=df_numeric.columns)
+
+print('df_scaled:')
+print(df_scaled)
+
+# # Z-score Standardization
+# scaler = StandardScaler()
+# df_standardized = pd.DataFrame(scaler.fit_transform(df_cleaned), columns=df_cleaned.columns)
+
 #exit()
 
 
@@ -55,17 +66,17 @@ print(df_numeric)
 # Identify outliers using Z-score
 from scipy import stats
 
-applicant = df_numeric['ApplicantIncome']
+applicant = df_scaled['ApplicantIncome']
 z_scores = np.abs(stats.zscore(applicant))
 print('z_scores: ', z_scores)
 
 
-df_no_outliers = df_numeric[(z_scores < 3)]
+df_no_outliers = df_scaled[(z_scores < 3)]
 print('df_no_outliers : ', len(df_no_outliers))
 print('df_no_outliers: ', df_no_outliers)
 
 
-df_outliers = df_numeric[(z_scores >= 3)]
+df_outliers = df_scaled[(z_scores >= 3)]
 print('df_outliers: ', df_outliers)
 
 # Or cap outliers at a threshold
