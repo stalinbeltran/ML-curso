@@ -37,10 +37,11 @@ print(df_encoded.head())
 # Identify outliers using Z-score
 from scipy import stats
 
-z_scores = np.abs(stats.zscore(df_cleaned))
+z_scores = np.abs(stats.zscore(df_encoded))
 print(z_scores)
-df_no_outliers = df_cleaned[(z_scores < 3).all(axis=1)]
+df_no_outliers = df_encoded[(z_scores < 3).all(axis=1)]
 
 # Or cap outliers at a threshold
 # upper_limit = df_cleaned['column_name'].quantile(0.95)
 # df_cleaned['column_name'] = np.where(df_cleaned['column_name'] > upper_limit, upper_limit, df_cleaned['column_name'])
+
