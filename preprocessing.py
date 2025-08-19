@@ -42,6 +42,7 @@ ncolums = df_dropped.shape[1]
 print('ncolums. ', ncolums)
 #pd.to_numeric(df['A'], errors='coerce').notnull().all())
 df_numeric = df_dropped.apply(pd.to_numeric, errors='coerce')
+df_numeric = df_numeric.dropna()
 print(df_numeric)
 
 #exit()
@@ -55,8 +56,9 @@ print(df_numeric)
 from scipy import stats
 
 z_scores = np.abs(stats.zscore(df_numeric))
-print(len(z_scores))
+
 df_no_outliers = df_numeric[(z_scores < 3).all(axis=1)]
+print('df_no_outliers : ', len(df_no_outliers))
 
 # Or cap outliers at a threshold
 # upper_limit = df_cleaned['column_name'].quantile(0.95)
