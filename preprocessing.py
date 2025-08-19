@@ -72,3 +72,7 @@ print('df_outliers: ', df_outliers)
 # upper_limit = df_cleaned['column_name'].quantile(0.95)
 # df_cleaned['column_name'] = np.where(df_cleaned['column_name'] > upper_limit, upper_limit, df_cleaned['column_name'])
 
+# Save the cleaned and preprocessed DataFrame to a new CSV file  
+df_no_outliers.to_csv('cleaned_preprocessed_data.csv', index=False)
+
+print('Data cleaning and preprocessing complete. File saved as cleaned_preprocessed_data.csv')
