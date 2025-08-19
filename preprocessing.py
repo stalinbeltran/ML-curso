@@ -13,14 +13,14 @@ df = pd.read_csv('loan-train.csv')  # Replace 'your_dataset.csv' with your actua
 #print(df.head())
 
 # Visualize missing data (optional)
-msno.matrix(df)
-msno.heatmap(df)
+#msno.matrix(df)
+#msno.heatmap(df)
 #plt.show()
 
 # Drop rows with missing values
 df_cleaned = df.dropna()
-msno.matrix(df_cleaned)
-msno.heatmap(df_cleaned)
+#msno.matrix(df_cleaned)
+#msno.heatmap(df_cleaned)
 #plt.show()
 
 # Or, fill missing values with the mean
@@ -28,9 +28,11 @@ msno.heatmap(df_cleaned)
 
 
 # One-hot encoding for categorical variables
-df_encoded = pd.get_dummies(df_cleaned, columns=['Gender', 'Married'])
+df_encoded = pd.get_dummies(df_cleaned, columns=['Gender', 'Married', 'Education', 'Self_Employed'])
 print(df_encoded.head())
-exit()
+#df_encoded.plot()
+#plt.show()
+
 
 # Identify outliers using Z-score
 from scipy import stats
