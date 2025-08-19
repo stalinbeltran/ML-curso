@@ -34,9 +34,9 @@ print(df_encoded.head())
 columns = df_encoded.columns[range(1, 14)]
 print(columns)
 
-
 df_dropped = df_encoded.drop(df_encoded.columns[range(1)], axis= 1)
-df_dropped = df_dropped.drop(df_dropped.columns[range(6, 19)], axis= 1)
+print(df_dropped.columns[7])
+df_dropped = df_dropped.drop(df_dropped.columns[range(7, 19)], axis= 1)
 print(df_dropped.head())
 ncolums = df_dropped.shape[1]
 print('ncolums. ', ncolums)
@@ -55,10 +55,18 @@ print(df_numeric)
 # Identify outliers using Z-score
 from scipy import stats
 
-z_scores = np.abs(stats.zscore(df_numeric))
+applicant = df_numeric['ApplicantIncome']
+z_scores = np.abs(stats.zscore(applicant))
+print('z_scores: ', z_scores)
 
-df_no_outliers = df_numeric[(z_scores < 3).all(axis=1)]
+
+df_no_outliers = df_numeric[(z_scores < 3)]
 print('df_no_outliers : ', len(df_no_outliers))
+print('df_no_outliers: ', df_no_outliers)
+
+
+df_outliers = df_numeric[(z_scores >= 3)]
+print('df_outliers: ', df_outliers)
 
 # Or cap outliers at a threshold
 # upper_limit = df_cleaned['column_name'].quantile(0.95)
