@@ -1,8 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import os
 
-url = 'https://en.wikipedia.org/wiki/Cloud-computing_comparison'  # Replace with the URL of the website you want to scrape
+url = 'https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm'  # Replace with the URL of the website you want to scrape
+baseurl = 'https://www.eia.gov/dnav/pet/'
 response = requests.get(url)
 
 # Check if the request was successful
@@ -18,24 +20,28 @@ print(soup.title.text)
 #print(soup)
 
 # Find the table containing the data
-table = soup.find('table', {'class': 'wikitable'})  # Replace 'data-table' with the actual id or class of the table
+link = soup.find('a', {'class': 'crumb'})  # Replace 'data-table' with the actual id or class of the table
 
-# Extract table rows
-rows = table.find_all('tr')
+print(link)
+documentLink = link['href']
+print(documentLink)
 
-# Loop through the rows and extract data
-data = []
-for row in rows:
-    cols = row.find_all('td')
-    cols = [col.text.strip() for col in cols]
-    data.append(cols)
+# Handle relative URLs
+full_url = os.path.join(baseurl, documentLink)
 
-# Convert the data into a pandas DataFrame for easier manipulation
-df = pd.DataFrame(data, columns=['Column1', 'Column2', 'Column3', 'Column2', 'Column3', 'Column2', 'Column3', 'Column2', 'Column3'])  # Replace with actual column names
+print('Full URL:', full_url)
 
-# Display the scraped data
-print(df)
+# Step 3: Download the document
+document_response = requests.get(full_url)
 
-
-# Save the DataFrame to a CSV file
-df.to_csv('scraped_data.csv', index=False)
+# Check if the document request was successful
+if document_response.status_code == 200:
+    # Save the document to a file
+    with open('report.xls', 'wb') as file:
+        file.write(document_response.content)
+    print('Document downloaded successfully.')
+else:
+    print('Failed to download the document. Status code:', document_response.status_code)
+    
+    
+    
