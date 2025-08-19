@@ -3,8 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import os
 
-url = 'https://www.eia.gov/dnav/pet/pet_pri_spt_s1_d.htm'  # Replace with the URL of the website you want to scrape
-baseurl = 'https://www.eia.gov/dnav/pet/'
+url = 'https://utilitytransitionhub.rmi.org/data-download/'  # Replace with the URL of the website you want to scrape
+baseurl = 'https://utilitytransitionhub.rmi.org/data-download/'
 response = requests.get(url)
 
 # Check if the request was successful
@@ -19,29 +19,21 @@ soup = BeautifulSoup(response.content, 'html.parser')
 print(soup.title.text)
 #print(soup)
 
-# Find the table containing the data
-link = soup.find('a', {'class': 'crumb'})  # Replace 'data-table' with the actual id or class of the table
-
-print(link)
-documentLink = link['href']
-print(documentLink)
-
-# Handle relative URLs
-full_url = os.path.join(baseurl, documentLink)
-
-print('Full URL:', full_url)
-
-# Step 3: Download the document
-document_response = requests.get(full_url)
-
-# Check if the document request was successful
-if document_response.status_code == 200:
-    # Save the document to a file
-    with open('report.xls', 'wb') as file:
-        file.write(document_response.content)
-    print('Document downloaded successfully.')
-else:
-    print('Failed to download the document. Status code:', document_response.status_code)
+# Find all document links on the page
+divs = soup.find_all('div', {'class': 'download'})
+#document_links
+# Loop through each link and download the corresponding document
+for i, div in enumerate(divs):
+    link = div.find('a')
+    document_url = os.path.join(baseurl, link['href'])
+    document_response = requests.get(document_url)
     
-    
+    if document_response.status_code == 200:
+        # Save each document with a unique name
+        file_name = f'report_{i+1}.pdf'
+        with open(file_name, 'wb') as file:
+            file.write(document_response.content)
+        print(f'Document {i+1} downloaded successfully as {file_name}.')
+    else:
+        print(f'Failed to download document {i+1}. Status code:', document_response.status_code)
     
