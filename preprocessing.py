@@ -36,7 +36,7 @@ print(columns)
 
 
 df_dropped = df_encoded.drop(df_encoded.columns[range(1)], axis= 1)
-df_dropped = df_dropped.drop(df_dropped.columns[range(1, 19)], axis= 1)
+df_dropped = df_dropped.drop(df_dropped.columns[range(4, 19)], axis= 1)
 print(df_dropped.head())
 ncolums = df_dropped.shape[1]
 print('ncolums. ', ncolums)
