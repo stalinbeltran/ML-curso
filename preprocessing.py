@@ -15,13 +15,30 @@ df = pd.read_csv('loan-train.csv')  # Replace 'your_dataset.csv' with your actua
 # Visualize missing data (optional)
 msno.matrix(df)
 msno.heatmap(df)
-plt.show()
+#plt.show()
 
 # Drop rows with missing values
 df_cleaned = df.dropna()
 msno.matrix(df_cleaned)
 msno.heatmap(df_cleaned)
-plt.show()
+#plt.show()
 
 # Or, fill missing values with the mean
 #df_filled = df.fillna(df.mean())
+
+
+# One-hot encoding for categorical variables
+df_encoded = pd.get_dummies(df_cleaned, columns=['Gender', 'Married'])
+print(df_encoded.head())
+exit()
+
+# Identify outliers using Z-score
+from scipy import stats
+
+z_scores = np.abs(stats.zscore(df_cleaned))
+print(z_scores)
+df_no_outliers = df_cleaned[(z_scores < 3).all(axis=1)]
+
+# Or cap outliers at a threshold
+# upper_limit = df_cleaned['column_name'].quantile(0.95)
+# df_cleaned['column_name'] = np.where(df_cleaned['column_name'] > upper_limit, upper_limit, df_cleaned['column_name'])
