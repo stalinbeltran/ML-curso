@@ -35,11 +35,11 @@ columns = df_encoded.columns[range(1, 14)]
 print(columns)
 
 
-df_dropped = df_encoded.drop(df_encoded.columns[range(1, 20)], axis= 1)
-#df_dropped = df_encoded.drop(df_encoded.columns[range(0, 14)], axis= 1)
+df_dropped = df_encoded.drop(df_encoded.columns[range(1)], axis= 1)
+df_dropped = df_dropped.drop(df_dropped.columns[range(1, 19)], axis= 1)
 print(df_dropped.head())
-
-exit()
+df_numeric = pd.to_numeric(df_dropped['Dependents'])
+print(df_numeric.head())
 
 #df_encoded.plot()
 #plt.show()
