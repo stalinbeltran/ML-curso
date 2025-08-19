@@ -26,7 +26,13 @@ divs = soup.find_all('div', {'class': 'download'})
 for i, div in enumerate(divs):
     link = div.find('a')
     document_url = os.path.join(baseurl, link['href'])
-    document_response = requests.get(document_url)
+    try:
+        print("trying url: ", document_url)
+        document_response = requests.get(document_url)
+        
+    except Exception as e:
+        print("error in url: ", document_url)
+        print(e)
     
     if document_response.status_code == 200:
         # Save each document with a unique name
