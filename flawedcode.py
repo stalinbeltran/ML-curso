@@ -13,7 +13,15 @@ def handle_missing_values(df):
     return df.dropna()
 
 def remove_outliers(df):
+    df = df[df.columns[0:7]]
+    print(df)
+    z = stats.zscore(df)
+    #z = stats.zscore(df['Married_No'])
+    #print(z)
+    exit()
+    df = df.drop(df.columns[range(7, 18)], axis= 1)
     z_scores = np.abs(stats.zscore(df))
+    
     return df[(z_scores < 3).all(axis=1)]
 
 def scale_data(df):
@@ -33,10 +41,13 @@ df = load_data('loan-train.csv')
 #data preprocessing
 df = encode_categorical(df, ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area'])
 df = handle_missing_values(df)
-booleanMapping = {'Y': 1, 'N': 0}
-df['Loan_Status'] = df['Loan_Status'].map(booleanMapping)
+ynMapping = {'Y': 1, 'N': 0}
+df['Loan_Status'] = df['Loan_Status'].map(ynMapping)
 print(df['Loan_Status'])
-
+booleanMapping = {True: 1, False: 0}
+df = df[['Property_Area_Rural', 'Property_Area_Semiurban', 'Property_Area_Urban'] ] #.map(booleanMapping)
+print(df.head())
+exit()
 #data 
 
 print('data types:')
@@ -44,10 +55,9 @@ print(df.dtypes)
 print(df['Loan_ID'])
 df = df.drop('Loan_ID', axis= 1)
 df['Dependents'] = pd.to_numeric(df['Dependents'], errors='coerce')
-#df = df.drop(df.columns[range(1, 18)], axis= 1)
 print(df.dtypes)
-exit()
 df = remove_outliers(df)
+exit()
 
 #data preprocessing
 df = scale_data(df)
