@@ -37,11 +37,15 @@ booleanMapping = {'Y': 1, 'N': 0}
 df['Loan_Status'] = df['Loan_Status'].map(booleanMapping)
 print(df['Loan_Status'])
 
-#data validation
-df = df.drop('Loan_ID')
+#data 
 
-df = df['Loan_ID']
-print(df)
+print('data types:')
+print(df.dtypes)
+print(df['Loan_ID'])
+df = df.drop('Loan_ID', axis= 1)
+df['Dependents'] = pd.to_numeric(df['Dependents'], errors='coerce')
+#df = df.drop(df.columns[range(1, 18)], axis= 1)
+print(df.dtypes)
 exit()
 df = remove_outliers(df)
 
@@ -67,3 +71,5 @@ pickle.dump(model, open(filename, 'wb'))
 loaded_model = pickle.load(open(filename, 'rb'))
 result = loaded_model.score(X_test, y_test)
 print(f'Model Accuracy: {result:.2f}')
+
+
