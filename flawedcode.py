@@ -13,13 +13,17 @@ def handle_missing_values(df):
     return df.dropna()
 
 def remove_outliers(df):
-    df = df[df.columns[16:18]]
-    # print(df)
+    df = df[df.columns[0]]
+    print('todos los datos:')
+    print(df)
     # z = stats.zscore(df)
     # exit()
+    print('head:')
     print(df.head())
-    z_scores = np.abs(stats.zscore(df))
+    z_scores = np.abs(stats.zscore(df, nan_policy='omit'))
+    print('z scores:')
     print(z_scores)
+    exit()
     nuevos = df[(z_scores < 3).all(axis=1)]
     print(nuevos)
     return df[(z_scores < 3).all(axis=1)]
