@@ -8,11 +8,12 @@ print(df.dtypes)
 print(df[ ['Credit_History', 'Education'] ])
 print(df['Education'].replace({'Graduate': 1, 'Not Graduate': 0}))
 
-def booleanToInt(value):
-    print('booleanToInt value: ')
-    print(value)
-    return ''
-print(df.apply(booleanToInt))
+def booleanToInt(row):
+    print('booleanToInt row: ')
+    print(row)
+    return 1 if row.all() else 0
+    
+print(df.apply(booleanToInt, axis = 1))
 
 
 
