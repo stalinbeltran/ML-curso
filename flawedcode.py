@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from scipy import stats
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 import pickle
@@ -8,7 +10,7 @@ def load_data(filepath):
     return pd.read_csv(filepath)
 
 def handle_missing_values(df):
-    return df.dropna
+    return df.dropna()
 
 def remove_outliers(df):
     z_scores = np.abs(stats.zscore(df))
@@ -31,6 +33,11 @@ df = load_data('loan-train.csv')
 #data preprocessing
 df = encode_categorical(df, ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area'])
 df = handle_missing_values(df)
+booleanMapping = {'Y': 1, 'N': 0}
+df['Loan_Status'] = df['Loan_Status'].map(booleanMapping)
+print(df['Loan_Status'])
+exit()
+
 #data validation
 df = remove_outliers(df)
 #data preprocessing
