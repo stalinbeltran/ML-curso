@@ -13,7 +13,7 @@ def handle_missing_values(df):
     return df.dropna()
 
 def remove_outliers(df):
-    # df = df[df.columns[0:18]]
+    df = df[df.columns[1:18]]
     # print(df)
     # z = stats.zscore(df)
     # exit()
