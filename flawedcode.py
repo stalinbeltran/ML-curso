@@ -13,15 +13,15 @@ def handle_missing_values(df):
     return df.dropna()
 
 def remove_outliers(df):
-    df = df[df.columns[0:9]]
-    print(df)
-    z = stats.zscore(df)
-    #z = stats.zscore(df['Married_No'])
-    #print(z)
-    exit()
-    df = df.drop(df.columns[range(7, 18)], axis= 1)
+    # df = df[df.columns[0:18]]
+    # print(df)
+    # z = stats.zscore(df)
+    # exit()
+    print(df.head())
     z_scores = np.abs(stats.zscore(df))
-    
+    print(z_scores)
+    nuevos = df[(z_scores < 3).all(axis=1)]
+    print(nuevos)
     return df[(z_scores < 3).all(axis=1)]
 
 def scale_data(df):
@@ -57,6 +57,7 @@ df = df.drop('Loan_ID', axis= 1)
 df['Dependents'] = pd.to_numeric(df['Dependents'], errors='coerce')
 print(df.dtypes)
 df = remove_outliers(df)
+print(df.head())
 exit()
 
 #data preprocessing
