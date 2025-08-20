@@ -21,5 +21,9 @@ def booleanToInt(val):
 
 
 print(df.map(booleanToInt))
+print(df['Married'].apply(booleanToInt))
+df['Married'] = df['Married'].apply(booleanToInt)
+print(df)
+
 
 df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
