@@ -8,7 +8,7 @@ def load_data(filepath):
     return pd.read_csv(filepath)
 
 def handle_missing_values(df):
-    return df.fillna(df.mean())
+    return df.dropna
 
 def remove_outliers(df):
     z_scores = np.abs(stats.zscore(df))
@@ -29,22 +29,20 @@ def save_data(df, output_filepath):
 # Load dataset
 df = load_data('loan-train.csv')
 #data preprocessing
+df = encode_categorical(df, ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area'])
 df = handle_missing_values(df)
-df = encode_categorical(df, ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area', 'Loan_Status'])
 #data validation
 df = remove_outliers(df)
+#data preprocessing
 df = scale_data(df)
 
 
-
-
-
-
-# Load dataset (Flaw: No data validation or sanitization)
-data = pd.read_csv('user_data.csv')
 # Split the dataset into features and target (Flaw: No input validation)
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
+print(y)
+exit()
+
 # Split the data into training and testing sets (Flaw: Fixed random state)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 # Train a simple logistic regression model (Flaw: No model security checks)
