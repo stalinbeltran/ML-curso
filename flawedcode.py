@@ -45,7 +45,7 @@ ynMapping = {'Y': 1, 'N': 0}
 df['Loan_Status'] = df['Loan_Status'].map(ynMapping)
 print(df['Loan_Status'])
 booleanMapping = {True: 1, False: 0}
-df = df[['Property_Area_Rural', 'Property_Area_Semiurban', 'Property_Area_Urban'] ] #.map(booleanMapping)
+df = df[['Property_Area_Rural', 'Property_Area_Semiurban', 'Property_Area_Urban'] ].replace(booleanMapping)
 print(df.head())
 exit()
 #data 
