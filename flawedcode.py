@@ -1,0 +1,59 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+import pickle
+
+
+def load_data(filepath):
+    return pd.read_csv(filepath)
+
+def handle_missing_values(df):
+    return df.fillna(df.mean())
+
+def remove_outliers(df):
+    z_scores = np.abs(stats.zscore(df))
+    return df[(z_scores < 3).all(axis=1)]
+
+def scale_data(df):
+    scaler = StandardScaler()
+    return pd.DataFrame(scaler.fit_transform(df), columns=df.columns)
+
+def encode_categorical(df, categorical_columns):
+    return pd.get_dummies(df, columns=categorical_columns)
+
+def save_data(df, output_filepath):
+    df.to_csv(output_filepath, index=False)
+
+
+
+# Load dataset
+df = load_data('loan-train.csv')
+#data preprocessing
+df = handle_missing_values(df)
+df = encode_categorical(df, ['Gender', 'Married', 'Education', 'Self_Employed', 'Property_Area', 'Loan_Status'])
+#data validation
+df = remove_outliers(df)
+df = scale_data(df)
+
+
+
+
+
+
+# Load dataset (Flaw: No data validation or sanitization)
+data = pd.read_csv('user_data.csv')
+# Split the dataset into features and target (Flaw: No input validation)
+X = data.iloc[:, :-1]
+y = data.iloc[:, -1]
+# Split the data into training and testing sets (Flaw: Fixed random state)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Train a simple logistic regression model (Flaw: No model security checks)
+model = LogisticRegression()
+model.fit(X_train, y_train)
+# Save the model to disk (Flaw: Unencrypted model saving)
+filename = 'finalized_model.sav'
+pickle.dump(model, open(filename, 'wb'))
+# Load the model from disk for later use (Flaw: No integrity checks on the loaded model)
+loaded_model = pickle.load(open(filename, 'rb'))
+result = loaded_model.score(X_test, y_test)
+print(f'Model Accuracy: {result:.2f}')
