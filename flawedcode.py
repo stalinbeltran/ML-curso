@@ -13,7 +13,7 @@ def handle_missing_values(df):
     return df.dropna()
 
 def remove_outliers(df):
-    df = df[df.columns[0:7]]
+    df = df[df.columns[0:9]]
     print(df)
     z = stats.zscore(df)
     #z = stats.zscore(df['Married_No'])
@@ -46,6 +46,7 @@ df['Loan_Status'] = df['Loan_Status'].map(ynMapping)
 print(df['Loan_Status'])
 
 #boolean replace:
+booleanMapping = {True: 1, False: 0}
 df = df.replace(booleanMapping)
 print(df.head())
 
