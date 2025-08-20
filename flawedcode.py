@@ -36,10 +36,15 @@ df = handle_missing_values(df)
 booleanMapping = {'Y': 1, 'N': 0}
 df['Loan_Status'] = df['Loan_Status'].map(booleanMapping)
 print(df['Loan_Status'])
-exit()
 
 #data validation
+df = df.drop('Loan_ID')
+
+df = df['Loan_ID']
+print(df)
+exit()
 df = remove_outliers(df)
+
 #data preprocessing
 df = scale_data(df)
 
@@ -48,7 +53,7 @@ df = scale_data(df)
 X = data.iloc[:, :-1]
 y = data.iloc[:, -1]
 print(y)
-exit()
+
 
 # Split the data into training and testing sets (Flaw: Fixed random state)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
