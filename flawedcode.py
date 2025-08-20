@@ -44,9 +44,9 @@ df = handle_missing_values(df)
 ynMapping = {'Y': 1, 'N': 0}
 df['Loan_Status'] = df['Loan_Status'].map(ynMapping)
 print(df['Loan_Status'])
-booleanMapping = {True: 1, False: 0}
-booleanCols = ['Property_Area_Rural', 'Property_Area_Semiurban', 'Property_Area_Urban']
-df[booleanCols] = df[booleanCols].replace(booleanMapping)
+
+#boolean replace:
+df = df.replace(booleanMapping)
 print(df.head())
 
 print('data types:')
