@@ -115,7 +115,7 @@ print(df[ ['Married', 'ApplicantIncome'] ])
 
 print('\n')
 print('show na rows: ')
-print(df[ ['Married', 'ApplicantIncome'] ].where(df['Married'].isna()))
+print(df[ ['Married', 'ApplicantIncome'] ][df['Married'].isna()] )
 
 
 print('\n')
