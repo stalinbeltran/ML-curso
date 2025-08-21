@@ -80,4 +80,13 @@ print('\n')
 print('std of every col: ')
 print(df.columns[0])
 print(df.drop('Loan_ID', axis = 1))
-print(df.drop(df.columns[0], axis = 1).apply(np.std, axis = 0))
+print(df[ ['Married', 'ApplicantIncome'] ].apply(np.std, axis = 0))
+
+print('\n')
+print('mean of every col: ')
+print(df[ ['Married', 'ApplicantIncome'] ].apply(np.mean, axis = 0))
+
+
+print('\n')
+print('z-score of every value: ')
+print(df['ApplicantIncome'].map(stats.zscore))
