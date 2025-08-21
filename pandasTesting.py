@@ -26,4 +26,9 @@ df['Married'] = df['Married'].apply(booleanToInt)
 print(df)
 
 
-df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+df = pd.DataFrame({
+    'A': [1, 2, 3],
+    'B': [4, 5, 6],
+    'columna': [45,67, 989, 1000]
+    })
+print(df)
