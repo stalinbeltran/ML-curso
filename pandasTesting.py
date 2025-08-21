@@ -30,6 +30,6 @@ df = pd.DataFrame({
     'A': [1, 2, 3],
     'B': [4, 5, 6],
     'columna': [45,67, 989]
-    })
+    }, index = ['primero', 'segundo', 'tercero'])
 print(df)
 print(df.apply(np.mean, axis = 0))
