@@ -124,8 +124,8 @@ print(df['Married'].isna())
 
 
 print('\n')
-print('show where Married nan (not working): ')
+print('show rows where Married nan: ')
 #print( df['Married'].where(df['Married'].isna() == False) )
-print( df['Married'].where("df['Married'].isna() == False") )
+print( df[df['Married'].isna()] )
 
 
