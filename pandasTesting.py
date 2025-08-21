@@ -45,5 +45,6 @@ print(df.loc[df['ApplicantIncome'] > 8000])
 print(df.filter(items=['ApplicantIncome', 'Married']))
 print(df.filter(like = 'Income', axis = 1))
 print(df.filter(like = 'Y', axis = 0))
+print(df[df['Loan_Status'] == 'N'])
 
 
