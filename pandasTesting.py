@@ -29,6 +29,7 @@ print(df)
 df = pd.DataFrame({
     'A': [1, 2, 3],
     'B': [4, 5, 6],
-    'columna': [45,67, 989, 1000]
+    'columna': [45,67, 989]
     })
 print(df)
+print(df.apply(np.mean, axis = 0))
