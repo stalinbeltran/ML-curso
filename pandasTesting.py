@@ -89,4 +89,4 @@ print(df[ ['Married', 'ApplicantIncome'] ].apply(np.mean, axis = 0))
 
 print('\n')
 print('z-score of every value: ')
-print(df['ApplicantIncome'].map(stats.zscore))
+print(stats.zscore(df['ApplicantIncome']))
