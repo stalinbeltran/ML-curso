@@ -2,16 +2,39 @@ import pandas as pd
 import numpy as np
 from scipy import stats
 
-df = pd.DataFrame({
-    'A': [1, 2, 3],
-    'B': [4, 5, 6],
-    'columna': [45,67, 989]
-    }, index = ['primero', 'segundo', 'tercero'])
-print(df)
-print(df.apply(np.mean, axis = 0))
-print(df.loc['segundo'])    #second row
-print(df.iloc[2])       #third row
+print('''
+____________________________________________________________________________
+                                **************
+____________________________________________________________________________
+''')
 
+
+df = pd.DataFrame({
+    'columna A': [1, 2, 3],
+    'columna B': [4, 5, 6],
+    'columna C': [45,67, 989]
+    }, index = ['primero', 'segundo', 'tercero'])
+    
+
+print('\n')
+print('original data frame: ')
+print(df)
+print('\n')
+print('mean of a colum: ')
+print(df.apply(np.mean, axis = 0))
+print('\n')
+print('mean of a row: ')
+print(df.apply(np.mean, axis = 1))
+print('\n')
+print(df.loc['segundo'])    #second row
+print('\n')
+print(df.iloc[2])       #third row
+print('\n')
+print('std of every col: ')
+print(df.apply(np.std, axis = 0))
+
+
+#exit()
 
 df = pd.read_csv('loan-train.csv')
 print(df.head())
@@ -51,3 +74,10 @@ print(df.mask(df == 'Y', 1))
 print(df.memory_usage())
 print(df['ApplicantIncome'].max())
 print(df['ApplicantIncome'][df['ApplicantIncome'] > df['ApplicantIncome'].max()*0.5])
+
+
+print('\n')
+print('std of every col: ')
+print(df.columns[0])
+print(df.drop('Loan_ID', axis = 1))
+print(df.drop(df.columns[0], axis = 1).apply(np.std, axis = 0))
