@@ -155,5 +155,15 @@ print('query Married == 3+ : ')
 print( df.query("@df['Dependents'] == '3+'") )
 
 
+# print('\n')
+# print('query Gender == np.nan (no funciona): ')
+# print( df.query("@df['Gender'] == @np.nan") )       # '>' not supported between instances of 'numpy._ArrayFunctionDispatcher' and 'int'
+
+
+print('\n')
+print('query Gender == Male: ')
+print( df.query("@df['Gender'] == 'Male'") )
+
+
 
 
