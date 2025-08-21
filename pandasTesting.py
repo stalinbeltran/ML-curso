@@ -137,6 +137,23 @@ print( df.iloc[ [0, 228, 259, 500]] )
 
 print('\n')
 print('Married is NaN?: ')
-print(df['Married'] == np.nan)
 print(df['Married'].where((df['Married'] == np.nan) == True))
 print( df['Married'].where(df['Married'] != np.nan) )
+
+print('\n')
+print('Married == NaN?: ')
+print(df[df['Married'].isna()])
+
+
+
+print('\n')
+print('query Married == 0 : ')
+print( df.query("@df['Married'] == 0") )
+
+print('\n')
+print('query Married == 3+ : ')
+print( df.query("@df['Dependents'] == '3+'") )
+
+
+
+
