@@ -46,5 +46,6 @@ print(df.filter(items=['ApplicantIncome', 'Married']))
 print(df.filter(like = 'Income', axis = 1))
 print(df.filter(like = 'Y', axis = 0))
 print(df[df['Loan_Status'] == 'N'])
-
+print(df.query('(ApplicantIncome) > 9000'))
+print(df.mask(df == 'Y', 1))
 
