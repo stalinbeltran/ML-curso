@@ -94,3 +94,38 @@ print(stats.zscore(df['ApplicantIncome']))
 print('\n')
 print('zscore of 2 cols: ')
 print(df[ ['Married', 'ApplicantIncome'] ].apply(stats.zscore, axis = 0, nan_policy='omit'))
+
+
+print('\n')
+print('zscore of 2 cols + dropna: ')
+print(df[ ['Married', 'ApplicantIncome'] ].apply(stats.zscore, axis = 0, nan_policy='omit').dropna())
+
+
+print('\n')
+print('z-score of every value of "ApplicantIncome" column + dropna: ')
+print(df[ ['ApplicantIncome'] ].apply(stats.zscore, axis = 0, nan_policy='omit').dropna())
+
+print('\n')
+print('show Married and ApplicantIncome types: ')
+print(df[ ['Married', 'ApplicantIncome'] ].dtypes)
+
+print('\n')
+print('show Married and ApplicantIncome: ')
+print(df[ ['Married', 'ApplicantIncome'] ])
+
+print('\n')
+print('show na rows: ')
+print(df[ ['Married', 'ApplicantIncome'] ].where(df['Married'].isna()))
+
+
+print('\n')
+print('Married is na?: ')
+print(df['Married'].isna())
+
+
+print('\n')
+print('show where Married nan (not working): ')
+#print( df['Married'].where(df['Married'].isna() == False) )
+print( df['Married'].where("df['Married'].isna() == False") )
+
+
