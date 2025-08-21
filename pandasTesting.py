@@ -134,3 +134,7 @@ print('\n')
 print('show rows 0, 228, 259, 500: ')
 #print( df['Married'].where(df['Married'].isna() == False) )
 print( df.iloc[ [0, 228, 259, 500]] )
+
+print('\n')
+print('Married is None?: ')
+print( df['Married'].where(df['Married'] is None) )
