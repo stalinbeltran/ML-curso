@@ -33,3 +33,5 @@ df = pd.DataFrame({
     }, index = ['primero', 'segundo', 'tercero'])
 print(df)
 print(df.apply(np.mean, axis = 0))
+print(df.loc['segundo'])
+print(df.iloc[2])
