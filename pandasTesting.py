@@ -40,3 +40,7 @@ print(df.map(lambda x: 0 if x == 'N' else x))
 print(df['ApplicantIncome'] > 8000)
 print((df['ApplicantIncome'] > 8000)[0])
 print((df['ApplicantIncome'] > 8000)[611])
+print(df[df['ApplicantIncome'] > 8000])
+print(df.loc[df['ApplicantIncome'] > 8000])
+
+
