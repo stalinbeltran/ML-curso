@@ -88,5 +88,9 @@ print(df[ ['Married', 'ApplicantIncome'] ].apply(np.mean, axis = 0))
 
 
 print('\n')
-print('z-score of every value: ')
+print('z-score of every value of "ApplicantIncome" column: ')
 print(stats.zscore(df['ApplicantIncome']))
+
+print('\n')
+print('zscore of 2 cols: ')
+print(df[ ['Married', 'ApplicantIncome'] ].apply(stats.zscore, axis = 0, nan_policy='omit'))
